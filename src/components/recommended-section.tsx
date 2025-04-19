@@ -23,9 +23,14 @@ export default function RecommendedSection({ recommendedMovies }: RecommendedSec
                         <div className="group cursor-pointer">
                             <div className="relative aspect-[2/3] overflow-hidden rounded-lg">
                                 <Image
-                                    src={`https://www.themoviedb.org/t/p/w440_and_h660_face${movie.poster_path}` || "/placeholder.svg"}
-                                    alt={movie.title}
+                                    src={
+                                        movie.poster_path
+                                            ? `https://www.themoviedb.org/t/p/w440_and_h660_face${movie.poster_path}`
+                                            : "/placeholder.svg"
+                                    }
+                                    alt={movie.title || "Movie Title"}
                                     fill
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 20vw"
                                     className="object-cover transition-transform group-hover:scale-105"
                                 />
                             </div>

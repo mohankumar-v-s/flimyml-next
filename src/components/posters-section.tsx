@@ -19,6 +19,7 @@ export default function PostersSection({ posters }: { posters: Posters[] }) {
                             src={`https://image.tmdb.org/t/p/w500${poster?.file_path}`}
                             alt={`Movie poster ${index}`}
                             fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 20vw"
                             className="object-cover transition-transform hover:scale-105"
                         />
                     </div>

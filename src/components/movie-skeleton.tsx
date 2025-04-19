@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton"
 
-export default function MovieSkeleton() {
+export default function SkeletonDetailsPage() {
     return (
         <div className="min-h-screen bg-black text-white pt-4">
             <main className="container mx-auto px-4">
