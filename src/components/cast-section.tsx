@@ -17,7 +17,7 @@ export default function CastSection({ castMembers }: CastSectionProps) {
             <div className="flex gap-4 overflow-x-auto no-scrollbar pb-4">
                 {castMembers.map((member, index) => (
                     <div key={index} className="flex-shrink-0 text-center bg-white rounded">
-                        <div className="relative h-40 w-36 overflow-hidden rounded-t">
+                        <div className="relative h-40 w-36 overflow-hidden rounded-t cursor-pointer">
                             <Image
                                 src={
                                     member.profile_path
@@ -30,7 +30,8 @@ export default function CastSection({ castMembers }: CastSectionProps) {
                                 className="object-cover"
                             />
                         </div>
-                        <h3 className="my-1 text-sm font-medium text-black truncate max-w-36">{member.name}</h3>
+                        <h3 className="my-1 text-sm font-medium text-black truncate max-w-36 cursor-pointer">{member.name}</h3>
+                        <h4 className="my-1 text-sm font-medium text-black truncate max-w-36 cursor-pointer">{member.character}</h4>
                     </div>
                 ))}
             </div>

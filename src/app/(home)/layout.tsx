@@ -1,5 +1,5 @@
-import BottomBar from "@/components/BottomBar"
-import NavBar from "@/components/NavBar"
+import BottomBar from "@/components/bottom-bar"
+import NavBar from "@/components/nav-bar"
 
 export default function HomeLayout({
     children,

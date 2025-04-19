@@ -6,6 +6,7 @@ interface Movie {
     title: string;
     id: string;
     media_type: string;
+    original_name: string;
 }
 
 interface RecommendedSectionProps {
@@ -28,13 +29,13 @@ export default function RecommendedSection({ recommendedMovies }: RecommendedSec
                                             ? `https://www.themoviedb.org/t/p/w440_and_h660_face${movie.poster_path}`
                                             : "/placeholder.svg"
                                     }
-                                    alt={movie.title || "Movie Title"}
+                                    alt={movie.title || movie.original_name}
                                     fill
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 20vw"
                                     className="object-cover transition-transform group-hover:scale-105"
                                 />
                             </div>
-                            <h3 className="mt-2 text-sm font-medium">{movie.title}</h3>
+                            <h3 className="mt-2 text-sm font-medium">{movie.title || movie.original_name}</h3>
                         </div>
                     </Link>
                 ))}

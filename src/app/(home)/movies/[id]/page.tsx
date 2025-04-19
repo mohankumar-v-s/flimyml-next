@@ -1,6 +1,6 @@
 import Image from "next/image"
 import React from "react"
-import { Play, Clock } from "lucide-react"
+import { Clock } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import CastSection from "@/components/cast-section"
@@ -23,16 +23,26 @@ async function getMovieDetails(id: number) {
         images: `${baseUrl}/images?api_key=${apiKey}`
     };
 
-    const [details, cast, recommendations, videos, images] = await Promise.all([
-        fetch(endpoints.details).then(res => res.json()),
-        fetch(endpoints.cast).then(res => res.json()),
-        fetch(endpoints.recommendations).then(res => res.json()),
-        fetch(endpoints.videos).then(res => res.json()),
-        fetch(endpoints.images).then(res => res.json())
+    const results = await Promise.allSettled([
+        fetch(endpoints.details),
+        fetch(endpoints.cast),
+        fetch(endpoints.recommendations),
+        fetch(endpoints.videos),
+        fetch(endpoints.images)
     ]);
 
-    return { details, cast, recommendations, videos, images };
+    const toJson = async (res: PromiseSettledResult<Response>) =>
+        res.status === "fulfilled" ? await res.value.json() : null;
+
+    return {
+        details: await toJson(results[0]),
+        cast: await toJson(results[1]),
+        recommendations: await toJson(results[2]),
+        videos: await toJson(results[3]),
+        images: await toJson(results[4])
+    };
 }
+
 
 
 export default async function MovieDetails({
@@ -83,19 +93,19 @@ export default async function MovieDetails({
                                 {movies?.details?.overview || "No description available."}
                             </p>
 
-                            <Button className="mb-8 bg-green-600 hover:bg-green-700">
+                            {/* <Button className="mb-8 bg-green-600 hover:bg-green-700">
                                 <Play className="mr-2 h-4 w-4" />
                                 WATCH NOW
-                            </Button>
+                            </Button> */}
 
-                            <CastSection castMembers={movies?.cast?.cast.slice(0, 20)} />
+                            <CastSection castMembers={movies?.cast?.cast.slice(0, 20) || []} />
                         </div>
                     </div>
 
-                    {movies?.videos?.results.length > 0 && <VideoSection movieVideos={movies?.videos?.results?.slice(0, 5)} />}
-                    <BackdropsSection backdropImages={movies?.images?.backdrops?.slice(0, 5)} />
-                    <PostersSection posters={movies?.images?.posters?.slice(0, 5)} />
-                    <RecommendedSection recommendedMovies={movies?.recommendations?.results} />
+                    {movies?.videos?.results?.length > 0 && <VideoSection movieVideos={movies?.videos?.results?.slice(0, 5) || []} />}
+                    <BackdropsSection backdropImages={movies?.images?.backdrops?.slice(0, 5) || []} />
+                    <PostersSection posters={movies?.images?.posters?.slice(0, 5) || []} />
+                    <RecommendedSection recommendedMovies={movies?.recommendations?.results || []} />
                 </main>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import Image from "next/image"
 import React from "react"
-import { Play } from "lucide-react"
+// import { Play } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import CastSection from "@/components/cast-section"
@@ -52,7 +52,7 @@ export default async function TVDetails({
                         <div className="relative mb-6 flex-shrink-0 md:mb-0 md:w-full lg:w-1/4">
                             <Image
                                 src={`${tv?.details?.poster_path ? IMAGE_PATH + tv?.details?.poster_path : "/assets/No-Image-Placeholder.png"}`}
-                                alt={tv?.details?.title || "Movie Poster"}
+                                alt={tv?.details?.original_name || "Movie Poster"}
                                 width={300}
                                 height={450}
                                 className="rounded-lg mx-auto"
@@ -61,7 +61,7 @@ export default async function TVDetails({
                         </div>
 
                         <div className="flex-grow">
-                            <h1 className="mb-2 text-3xl font-bold md:text-4xl lg:text-5xl">{tv?.details?.title}</h1>
+                            <h1 className="mb-2 text-3xl font-bold md:text-4xl lg:text-5xl">{tv?.details?.original_name}</h1>
 
                             <div className="my-4 sm:flex items-center gap-4">
                                 {tv?.details?.genres.map((data: { id: React.Key; name: string }) => (
@@ -79,10 +79,10 @@ export default async function TVDetails({
                                 {tv?.details?.overview || "No description available."}
                             </p>
 
-                            <Button className="mb-8 bg-green-600 hover:bg-green-700">
+                            {/* <Button className="mb-8 bg-green-600 hover:bg-green-700">
                                 <Play className="mr-2 h-4 w-4" />
                                 WATCH NOW
-                            </Button>
+                            </Button> */}
 
                             <CastSection castMembers={tv?.cast?.cast.slice(0, 20)} />
                         </div>

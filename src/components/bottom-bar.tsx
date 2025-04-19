@@ -25,7 +25,7 @@ export default function BottomBar() {
       id: 3,
       icon: <Monitor className="group-hover:text-blue-500 h-6 w-6" />,
       title: "WebSeries",
-      path: "/webseries",
+      path: "/tv",
     },
   ];
   return (

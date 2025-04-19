@@ -20,7 +20,7 @@ export default function BackdropsSection({ backdropImages }: { backdropImages: B
 
             <div className="relative">
                 <div className="relative aspect-video w-full overflow-hidden rounded-lg">
-                    <Image src={`https://image.tmdb.org/t/p/w500${backdropImages[currentBackdrop].file_path}`} alt="Movie backdrop" fill className="object-cover" />
+                    <Image src={`https://image.tmdb.org/t/p/w500${backdropImages[currentBackdrop]?.file_path}`} alt="Movie backdrop" fill className="object-cover" />
                 </div>
 
                 <button
@@ -39,7 +39,7 @@ export default function BackdropsSection({ backdropImages }: { backdropImages: B
             </div>
 
             <div className="mt-4 flex justify-center gap-2">
-                {backdropImages.map((_, index) => (
+                {backdropImages?.map((_, index) => (
                     <button
                         key={index}
                         className={`h-2 w-2 rounded-full ${currentBackdrop === index ? "bg-red-600" : "bg-gray-600"}`}
